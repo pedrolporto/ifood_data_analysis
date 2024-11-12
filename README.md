@@ -14,13 +14,13 @@ Este projeto utiliza um dataset fictício de clientes do iFood para realizar an�
 
 **Painel Power BI**
 
-![Visão geral de clientes](Screenshots/Dashboard_Power_BI_page-0001.jpg)
+![Visão geral de clientes](Images/Screenshots/Dashboard_Power_BI_page-0001.jpg)
 
-![Visão financeira](Screenshots/Dashboard_Power_BI_page-0002.jpg)
+![Visão financeira](Images/Screenshots/Dashboard_Power_BI_page-0002.jpg)
 
-![Visão de desempenho dos restaurantes](Screenshots/Dashboard_Power_BI_page-0003.jpg)
+![Visão de desempenho dos restaurantes](Images/Screenshots/Dashboard_Power_BI_page-0003.jpg)
 
-![Visão de engajamento dos usuários](Screenshots/Dashboard_Power_BI_page-0004.jpg)
+![Visão de engajamento dos usuários](Images/Screenshots/Dashboard_Power_BI_page-0004.jpg)
 
 ---
 
