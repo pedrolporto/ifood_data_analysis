@@ -1,0 +1,32 @@
+identificar insights estratégicos que possam ajudar no crescimento
+
+Além de interpretar os dados, você precisa 
+apresentar propostas que melhorem a retenção e aumentem a receita do clube.
+
+
+
+PASSOS
+1 Explorar o Dataset
+-> Identificação do conteúdo de cada coluna e seus relacionamentos
+-> Limpeza de inconsistência
+-> Tratamento 
+
+
+2 CRIANDO KPIs
+-> LTV = tempo de vida
+(ticket médio x # compras por cliente x tempo de relacionamento)
+
+->CAC
+(custo campanha/ # novos planos)
+
+->Churn Rate = Taxa de clientes que cancelaram o serviço
+( # desistentes / # clientes no mês )
+
+->Taxa de retenção = Taxa de clientes que continuam com o serviço
+( # clientes no mês - # clientes desistentes) / # clientes no mês
+
+->Valor médio de transações por categoria de restaurante
+
+
+3 ANÁLISE DE SEGMENTAÇÃO
+

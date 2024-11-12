@@ -1,0 +1,76 @@
+import numpy as np
+from datetime import datetime, timedelta
+import random
+
+# Function to generate random dates
+def random_date(start_date, end_date):
+    return start_date + timedelta(days=random.randint(0, (end_date - start_date).days))
+
+# Define new data parameters
+num_new_rows = 1500
+
+# Generate new data for 'clientes'
+new_clientes = pd.DataFrame({
+    'id_cliente': range(clientes_df['id_cliente'].max() + 1, clientes_df['id_cliente'].max() + 1 + num_new_rows),
+    'nome': [f"Cliente_{i}" for i in range(clientes_df['id_cliente'].max() + 1, clientes_df['id_cliente'].max() + 1 + num_new_rows)],
+    'idade': np.random.randint(18, 70, num_new_rows),
+    'genero': np.random.choice(['M', 'F'], num_new_rows),
+    'cidade': np.random.choice(['São Paulo', 'Rio de Janeiro', 'Salvador', 'Belo Horizonte', 'Curitiba'], num_new_rows),
+    'data_adesao_clube': [random_date(datetime(2018, 1, 1), datetime(2023, 12, 31)).strftime('%Y-%m-%d') for _ in range(num_new_rows)],
+    'ano': np.random.randint(2018, 2024, num_new_rows),
+    'mês': np.random.randint(1, 13, num_new_rows),
+    'mes_ano': [f"{ano}-{mes:02d}" for ano, mes in zip(np.random.randint(2018, 2024, num_new_rows), np.random.randint(1, 13, num_new_rows))],
+    'plano_clube': np.random.choice(['Básico', 'Premium'], num_new_rows),
+    'frequencia_compras': np.random.randint(0, 10, num_new_rows),
+    'LTV': np.round(np.random.uniform(0, 300, num_new_rows), 2),
+    'CAC': np.round(np.random.uniform(0, 100, num_new_rows), 2),
+    'Ticket Médio': np.round(np.random.uniform(20, 100, num_new_rows), 2),
+    'LTV_medio': np.round(np.random.uniform(100, 300, num_new_rows), 2),
+    'CAC_medio': np.round(np.random.uniform(10, 100, num_new_rows), 2)
+})
+
+# Generate new data for 'transacoes'
+new_transacoes = pd.DataFrame({
+    'id_transacao': range(transacoes_df['id_transacao'].max() + 1, transacoes_df['id_transacao'].max() + 1 + num_new_rows),
+    'id_cliente': np.random.choice(new_clientes['id_cliente'], num_new_rows),
+    'valor': np.round(np.random.uniform(10, 100, num_new_rows), 2),
+    'data_transacao': [random_date(datetime(2021, 1, 1), datetime(2023, 12, 31)).strftime('%Y-%m-%d') for _ in range(num_new_rows)],
+    'restaurante_id': np.random.randint(100, 200, num_new_rows),
+    'categoria': np.random.choice(['Pizza', 'Japonesa', 'Saudável', 'Italiana', 'Fast Food'], num_new_rows)
+})
+
+# Generate new data for 'engajamento'
+new_engajamento = pd.DataFrame({
+    'id_cliente': np.random.choice(new_clientes['id_cliente'], num_new_rows),
+    'visitas_mensais': np.random.randint(1, 12, num_new_rows),
+    'cancelamentos': np.random.choice([0, 1], num_new_rows, p=[0.8, 0.2]),
+    'valor_total_mensal': np.round(np.random.uniform(50, 500, num_new_rows), 2),
+    'data_mensal': [f"{random.randint(2018, 2023)}-{random.randint(1, 12):02d}" for _ in range(num_new_rows)],
+    'total_cancelamentos': np.random.randint(0, 20, num_new_rows),
+    'total_clientes': np.random.randint(10, 50, num_new_rows),
+    'churn_rate': np.round(np.random.uniform(0, 1, num_new_rows), 4),
+    'taxa_retencao': lambda churn_rate: 1 - churn_rate
+})
+
+# Generate new data for 'investimento_marketing'
+new_investimento_marketing = pd.DataFrame({
+    'mes_ano': [f"{random.randint(2018, 2023)}-{random.randint(1, 12):02d}" for _ in range(num_new_rows)],
+    'investimento_marketing': np.round(np.random.uniform(50, 600, num_new_rows), 2),
+    'numero_clientes': np.random.randint(1, 10, num_new_rows)
+})
+
+# Concatenate original data with the new data
+clientes_df_updated = pd.concat([clientes_df, new_clientes], ignore_index=True)
+transacoes_df_updated = pd.concat([transacoes_df, new_transacoes], ignore_index=True)
+engajamento_df_updated = pd.concat([engajamento_df, new_engajamento], ignore_index=True)
+investimento_marketing_df_updated = pd.concat([investimento_marketing_df, new_investimento_marketing], ignore_index=True)
+
+# Save updated data to a new Excel file
+updated_file_path = '/mnt/data/iFood_BI_Desafio_Completo_Dataset_Atualizado.xlsx'
+with pd.ExcelWriter(updated_file_path) as writer:
+    clientes_df_updated.to_excel(writer, sheet_name='clientes', index=False)
+    transacoes_df_updated.to_excel(writer, sheet_name='transacoes', index=False)
+    engajamento_df_updated.to_excel(writer, sheet_name='engajamento', index=False)
+    investimento_marketing_df_updated.to_excel(writer, sheet_name='investimento_marketing', index=False)
+
+updated_file_path
